@@ -42,6 +42,9 @@ importers:
       '@semantic-release/release-notes-generator':
         specifier: ^14.0.3
         version: 14.0.3(semantic-release@24.2.3(typescript@5.8.3))
+      '@stagewise/toolbar-react':
+        specifier: ^0.2.0
+        version: 0.2.0(@types/react@19.1.2)(react@19.1.0)
       '@storybook/addon-controls':
         specifier: ^8.6.7
         version: 8.6.12(storybook@8.6.12(bufferutil@4.0.9)(prettier@3.5.3)(utf-8-validate@5.0.10))
@@ -2748,6 +2751,15 @@ packages:
 
   '@solana/web3.js@1.98.2':
     resolution: {integrity: sha512-BqVwEG+TaG2yCkBMbD3C4hdpustR4FpuUFRPUmqRZYYlPI9Hg4XMWxHWOWRzHE9Lkc9NDjzXFX7lDXSgzC7R1A==}
+
+  '@stagewise/toolbar-react@0.2.0':
+    resolution: {integrity: sha512-y+oVWk0xPOoVxXFoBrASwyr+285/CK+16I4qEdO7dMo68UzzZkFNUXYE8f+T3VDebRBkeD3uSX2NVDTbVZ4YXQ==}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      react: '>=18.0.0'
+
+  '@stagewise/toolbar@0.3.0':
+    resolution: {integrity: sha512-NqbFwTAVukmxrJ6euGNZ9C/T9HTXx3/vkufsBqsjm1VC9XEo57JXrLMX4M62ZPdVJHFfe40B2nOVHAaOSKIAdw==}
 
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
@@ -10763,6 +10775,14 @@ snapshots:
       - encoding
       - typescript
       - utf-8-validate
+
+  '@stagewise/toolbar-react@0.2.0(@types/react@19.1.2)(react@19.1.0)':
+    dependencies:
+      '@stagewise/toolbar': 0.3.0
+      '@types/react': 19.1.2
+      react: 19.1.0
+
+  '@stagewise/toolbar@0.3.0': {}
 
   '@standard-schema/utils@0.3.0': {}
 

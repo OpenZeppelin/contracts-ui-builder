@@ -51,4 +51,24 @@ async function main() {
   );
 }
 
+// ---
+// Stagewise Toolbar Integration (Development Only)
+// To enable the Stagewise AI toolbar, set VITE_ENABLE_STAGEWISE_TOOLBAR=true in your .env or .env.local file.
+// The toolbar will only load in development mode and will never be included in production builds.
+// ---
+if (
+  import.meta.env.MODE === 'development' &&
+  import.meta.env.VITE_ENABLE_STAGEWISE_TOOLBAR === 'true'
+) {
+  void import('@stagewise/toolbar-react').then(({ StagewiseToolbar }) => {
+    const config = { plugins: [] };
+    const toolbarRoot = document.createElement('div');
+    toolbarRoot.id = 'stagewise-toolbar-root';
+    document.body.appendChild(toolbarRoot);
+    void import('react-dom/client').then(({ createRoot }) => {
+      createRoot(toolbarRoot).render(<StagewiseToolbar config={config} />);
+    });
+  });
+}
+
 void main(); // Explicitly ignore the promise returned by main()
