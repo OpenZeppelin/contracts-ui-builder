@@ -1,7 +1,3 @@
-import {
-  testStellarRpcConnection,
-  validateStellarRpcEndpoint,
-} from 'packages/adapter-stellar/src/configuration';
 import type React from 'react';
 
 import type {
@@ -23,6 +19,8 @@ import type {
   RelayerDetails,
   RelayerDetailsRich,
   StellarNetworkConfig,
+  TransactionStatusUpdate,
+  TxStatus,
   UiKitConfiguration,
   UserRpcProviderConfig,
 } from '@openzeppelin/contracts-ui-builder-types';
@@ -32,6 +30,7 @@ import { logger } from '@openzeppelin/contracts-ui-builder-utils';
 // Import functions from modules
 import { loadStellarContract, loadStellarContractWithMetadata } from './contract/loader';
 
+import { testStellarRpcConnection, validateStellarRpcEndpoint } from './configuration';
 import { getStellarSupportedExecutionMethods, validateStellarExecutionConfig } from './execution';
 import { getStellarExplorerAddressUrl, getStellarExplorerTxUrl } from './explorer';
 import {
@@ -164,9 +163,10 @@ export class StellarAdapter implements ContractAdapter {
     return getStellarCompatibleFieldTypes(parameterType);
   }
   generateDefaultField<T extends FieldType = FieldType>(
-    parameter: FunctionParameter
+    parameter: FunctionParameter,
+    contractSchema?: ContractSchema
   ): FormFieldType<T> {
-    return generateStellarDefaultField(parameter);
+    return generateStellarDefaultField(parameter, contractSchema);
   }
 
   // --- Transaction Formatting & Execution --- //
@@ -180,9 +180,17 @@ export class StellarAdapter implements ContractAdapter {
   }
   async signAndBroadcast(
     transactionData: unknown,
-    executionConfig?: ExecutionConfig
+    executionConfig: ExecutionConfig,
+    onStatusChange: (status: TxStatus, details: TransactionStatusUpdate) => void,
+    runtimeApiKey?: string
   ): Promise<{ txHash: string }> {
-    return signAndBroadcastStellarTransaction(transactionData, executionConfig);
+    return signAndBroadcastStellarTransaction(
+      transactionData,
+      executionConfig,
+      this.networkConfig,
+      onStatusChange,
+      runtimeApiKey
+    );
   }
 
   // NOTE: waitForTransactionConfirmation? is optional in the interface.
@@ -207,7 +215,8 @@ export class StellarAdapter implements ContractAdapter {
       functionId,
       this.networkConfig,
       params,
-      contractSchema
+      contractSchema,
+      (address: string) => this.loadContract({ contractAddress: address })
     );
   }
 
