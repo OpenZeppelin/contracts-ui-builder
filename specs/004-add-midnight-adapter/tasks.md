@@ -23,22 +23,22 @@
 
 ## Phase 1: Setup (Shared)
 
-- [ ] T001 [US0] Configure feature branch context for developers [P]
+- [x] T001 [US0] Configure feature branch context for developers [P]
   - Path: N/A
-- [ ] T002 [US0] Document dependency sync policy in README notes [P]
+- [x] T002 [US0] Document dependency sync policy in README notes [P]
   - Path: specs/004-add-midnight-adapter/plan.md
   - Notes: Align adapter config vs export manifest per FR-017
 
 ## Phase 2: Foundational (Blocking)
 
-- [ ] T003 [US0] Ensure ecosystem registration for Midnight exists and loads adapter [seq]
+- [x] T003 [US0] Ensure ecosystem registration for Midnight exists and loads adapter [seq]
   - Path: packages/builder/src/core/ecosystemManager.ts
-- [ ] T004 [US0] Persist contract definition inputs scaffolding [seq]
+- [x] T004 [US0] Persist contract definition inputs scaffolding [seq]
   - Path: packages/builder (storage service) + adapter-midnight integration
-- [ ] T005 [US0] Export manifest wiring for Midnight [seq]
+- [x] T005 [US0] Export manifest wiring for Midnight [seq]
   - Path: specs/004-add-midnight-adapter/contracts/export-manifest.md
 
-- [ ] Checkpoint: Foundation ready – user story implementation can begin
+- [x] Checkpoint: Foundation ready – user story implementation can begin
 
 ## Phase 3: [US1] Wallet connect + account (P1)
 
@@ -59,14 +59,14 @@ Independent Test: Select Midnight network, click Connect, see connected address.
 Goal: Provide inputs and load contract schema; render functions list.
 Independent Test: Submit valid inputs and see callable functions list.
 
-- [ ] T009 [US2] Implement persistence of `getContractDefinitionInputs()` values [seq]
+- [x] T009 [US2] Implement persistence of `getContractDefinitionInputs()` values [seq]
   - Path: packages/builder storage + adapter-midnight bridge
-- [ ] T010 [US2] Build `loadContract` conversion to `ContractSchema` with validation [seq]
-  - Path: packages/adapter-midnight/src/adapter.ts + utils
-- [ ] T011 [US2] Add validation errors for malformed inputs [P]
-  - Path: packages/adapter-midnight/src/adapter.ts
+- [x] T010 [US2] Build `loadContract` conversion to `ContractSchema` with validation [seq]
+  - Path: packages/adapter-midnight/src/contract/loader.ts + adapter.ts
+- [x] T011 [US2] Add validation errors for malformed inputs [P]
+  - Path: packages/adapter-midnight/src/utils/artifacts.ts + adapter.ts
 
-- [ ] Checkpoint: User Stories 1 and 2 work independently
+- [x] Checkpoint: User Stories 1 and 2 work independently
 
 ## Phase 5: [US3] Auto simple view rendering (P3)
 
